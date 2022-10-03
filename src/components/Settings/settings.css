@@ -1,0 +1,60 @@
+.Settings .MenuItem {
+  text-align: left;
+  font-size: small;
+  width: 80%;
+  max-width: 500px;
+  margin: auto;
+}
+  
+.MenuItem input {
+  width: 90%;
+  max-width: 100px;
+}
+
+.MenuItem select {
+  width: 90%;
+  max-width: 100px;
+}
+
+.ThresholdSlider .MuiSlider-track {
+  height: 4px;
+  border: none;
+  background-color: #73bd32;
+}
+
+.ThresholdSlider .MuiSlider-rail {
+  opacity: 100%;
+  background-color: #bd9008;
+}
+
+.ThresholdSlider .MuiSlider-thumb {
+  width: 10px;
+  height: 20px;
+  border: none;
+  border-radius: 2px;
+  background-color: #ffffff;
+  box-shadow: none;
+}
+
+.ThresholdSlider .MuiSlider-thumb:before {
+  display: none;
+}
+
+.ThresholdSlider .MuiSlider-thumb:hover {
+  box-shadow: none;
+  background-color: #c8c8c8;
+}
+
+.ThresholdSlider .MuiSlider-thumb:focus {
+  box-shadow: none;
+  background-color: #c8c8c8;
+}
+
+.ThresholdSlider .MuiSlider-thumb.Mui-active {
+  box-shadow: none;
+  background-color: #c8c8c8;
+}
+
+.ThresholdSlider .MuiSlider-thumb.Mui-focusVisible {
+  box-shadow: none;
+}

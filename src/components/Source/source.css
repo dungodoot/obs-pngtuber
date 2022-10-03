@@ -1,0 +1,32 @@
+.avatar {
+  height: 90%;
+  width: 100%;
+  margin: auto;
+  top: 10%;
+
+  position: absolute;
+  transition: filter 0.15s;
+}
+
+.avatar img {
+  height: 100%;
+}
+
+.speaking {
+  animation: bounceAnimation 0.3s;
+}
+
+.inactive {
+  filter: brightness(50%);
+}
+
+@keyframes bounceAnimation {
+  0% {
+    top: 10%;
+    animation-timing-function: cubic-bezier(0,0,0,1);
+  }
+  50% {
+    top: 0%;
+    animation-timing-function: cubic-bezier(1,0,1,1);
+  }
+}
