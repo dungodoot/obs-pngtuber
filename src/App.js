@@ -13,8 +13,8 @@ function App() {
     <Router>
       <div className="App">
         <Routes>
-          <Route exact path='/source' element={< Source />}></Route>
-          <Route exact path='/settings' element={< Settings />}></Route>
+          <Route exact path='/obs-pngtuber/source' element={< Source />}></Route>
+          <Route exact path='/obs-pngtuber/settings' element={< Settings />}></Route>
         </Routes>
       </div>
     </Router>
