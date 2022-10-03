@@ -1,7 +1,7 @@
 import './App.css';
 import React from 'react';
 import {
-  HashRouter as Router,
+  BrowserRouter as Router,
   Routes,
   Route
 } from 'react-router-dom';
@@ -10,11 +10,11 @@ import Settings from './components/Settings/settings';
 
 function App() {
   return (
-    <Router>
+    <Router basename='/obs-pngtuber'>
       <div className="App">
         <Routes>
-          <Route exact path='/obs-pngtuber/source' element={< Source />}></Route>
-          <Route exact path='/obs-pngtuber/settings' element={< Settings />}></Route>
+          <Route exact path='/source' element={< Source />} />
+          <Route exact path='/settings' element={< Settings />} />
         </Routes>
       </div>
     </Router>
