@@ -12,7 +12,7 @@ https://dungodoot.github.io/obs-pngtuber/settings
 ```
 https://dungodoot.github.io/obs-pngtuber/source
 ```
-4. Under `Tools > obs-websocket` settings, click on `Show Connect Info` and take note of the server port and server password. **DO NOT SHOW THIS ON STREAM.**
+4. Under `Tools > obs-websocket` settings, click on `Show Connect Info` and take note of the server port and server password. **:warning: DO NOT SHOW THIS ON STREAM. :warning:**
 5. Enter the server port and password in the custom dock.
 6. Select your desired audio input device, images and voice activity threshold.
 
