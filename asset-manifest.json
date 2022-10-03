@@ -1,0 +1,15 @@
+{
+  "files": {
+    "main.css": "/obs-pngtuber/static/css/main.9e39829b.css",
+    "main.js": "/obs-pngtuber/static/js/main.b09342c9.js",
+    "static/js/787.260398c0.chunk.js": "/obs-pngtuber/static/js/787.260398c0.chunk.js",
+    "index.html": "/obs-pngtuber/index.html",
+    "main.9e39829b.css.map": "/obs-pngtuber/static/css/main.9e39829b.css.map",
+    "main.b09342c9.js.map": "/obs-pngtuber/static/js/main.b09342c9.js.map",
+    "787.260398c0.chunk.js.map": "/obs-pngtuber/static/js/787.260398c0.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.9e39829b.css",
+    "static/js/main.b09342c9.js"
+  ]
+}
