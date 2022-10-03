@@ -2,7 +2,7 @@
 # OBS PNGtuber
 This tools lets you create a simple 2D avatar that reacts when you speak — without opening another app. Customization of your avatar is done in a custom browser dock in OBS Studio.
 
-## Installation
+## Usage
 1. Make sure you have [OBS Studio version 28.0.0 or later](https://obsproject.com/download) installed. If you have an earlier version of OBS Studio installed, install the latest version of the obs-websocket plugin [here](https://github.com/obsproject/obs-websocket/releases/).
 2. Under `Docks > Custom Browser Docks...`, add the URL below as a custom dock and click `Apply`.
 ```
