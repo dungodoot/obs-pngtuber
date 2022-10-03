@@ -1,15 +1,15 @@
 {
   "files": {
-    "main.css": "/obs-pngtuber/static/css/main.9e39829b.css",
-    "main.js": "/obs-pngtuber/static/js/main.8e87258a.js",
-    "static/js/787.260398c0.chunk.js": "/obs-pngtuber/static/js/787.260398c0.chunk.js",
-    "index.html": "/obs-pngtuber/index.html",
-    "main.9e39829b.css.map": "/obs-pngtuber/static/css/main.9e39829b.css.map",
-    "main.8e87258a.js.map": "/obs-pngtuber/static/js/main.8e87258a.js.map",
-    "787.260398c0.chunk.js.map": "/obs-pngtuber/static/js/787.260398c0.chunk.js.map"
+    "main.css": "/Dungodoot/obs-pngtuber/static/css/main.9e39829b.css",
+    "main.js": "/Dungodoot/obs-pngtuber/static/js/main.cb8e1d7c.js",
+    "static/js/787.260398c0.chunk.js": "/Dungodoot/obs-pngtuber/static/js/787.260398c0.chunk.js",
+    "index.html": "/Dungodoot/obs-pngtuber/index.html",
+    "main.9e39829b.css.map": "/Dungodoot/obs-pngtuber/static/css/main.9e39829b.css.map",
+    "main.cb8e1d7c.js.map": "/Dungodoot/obs-pngtuber/static/js/main.cb8e1d7c.js.map",
+    "787.260398c0.chunk.js.map": "/Dungodoot/obs-pngtuber/static/js/787.260398c0.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.9e39829b.css",
-    "static/js/main.8e87258a.js"
+    "static/js/main.cb8e1d7c.js"
   ]
 }
