@@ -1,0 +1,11 @@
+.Home a {
+    color: skyblue;
+}
+
+.Home a:visited {
+    color: mediumpurple;
+}
+
+.Home code {
+    background-color: #202126;
+}

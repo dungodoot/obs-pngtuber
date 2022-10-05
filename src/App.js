@@ -5,6 +5,7 @@ import {
   Routes,
   Route
 } from 'react-router-dom';
+import Home from './components/Home/home'
 import Source from './components/Source/source';
 import Settings from './components/Settings/settings';
 
@@ -13,6 +14,7 @@ function App() {
     <Router basename='/obs-pngtuber'>
       <div className="App">
         <Routes>
+        <Route exact path='/' element={< Home />} />
           <Route exact path='/source' element={< Source />} />
           <Route exact path='/settings' element={< Settings />} />
         </Routes>
