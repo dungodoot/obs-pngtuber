@@ -120,42 +120,42 @@ function ServerPasswordInput() {
   )
 }
 
-function Config() {
-  const [value, setValue] = useState(false);
-
-  function ConfigButton() {
-    const handleClick = (e) => {
-      setValue(!value);
-      console.log(value);
-    }
-  
-    return (
-      <div
-        className='ConfigButton'
-        onClick={handleClick}
-      >
-        <img src={process.env.PUBLIC_URL + (value ? '/close-line.svg' : '/settings-3-fill.svg')} />
-      </div>
-    )
-  }
-
-  return (
-    <div className='Config'>
-      <div
-        className='ConfigScreen'
-        style={value ? {} : {visibility: 'hidden', opacity: 0, transform: 'scale(1.2)'}}
-      >
-        <ServerPortInput />
-        <ServerPasswordInput />
-      </div>
-      <ConfigButton />
-    </div>
-  )
-}
-
 function Settings() {
   const [inputNames, setInputNames] = useState('[]');
   const obs = new OBSWebSocket();
+
+  function Config() {
+    const [value, setValue] = useState(false);
+  
+    function ConfigButton() {
+      const handleClick = (e) => {
+        setValue(!value);
+        console.log(value);
+      }
+    
+      return (
+        <div
+          className='ConfigButton'
+          onClick={handleClick}
+        >
+          <img src={process.env.PUBLIC_URL + (value ? '/close-line.svg' : '/settings-3-fill.svg')} />
+        </div>
+      )
+    }
+  
+    return (
+      <div className='Config'>
+        <div
+          className='ConfigScreen'
+          style={value ? {} : {visibility: 'hidden', opacity: 0, transform: 'scale(1.2)'}}
+        >
+          <ServerPortInput />
+          <ServerPasswordInput />
+        </div>
+        <ConfigButton />
+      </div>
+    )
+  }
 
   async function updateInputs(e) {
     console.log(e);
@@ -208,19 +208,18 @@ function Settings() {
   
   return (
     <div className='Settings'>
-      <InputSelect
-        inputNames={JSON.parse(inputNames)}
-      />
-      <ThresholdSlider />
-      <ImageUpload 
-        imageType='speaking'
-      />
-      <ImageUpload
-        imageType='inactive'
-      />
-      {/* <ServerPortInput />
-      <ServerPasswordInput /> */}
-
+      <div className='SettingsScreen'>
+        <InputSelect
+          inputNames={JSON.parse(inputNames)}
+        />
+        <ThresholdSlider />
+        <ImageUpload 
+          imageType='speaking'
+        />
+        <ImageUpload
+          imageType='inactive'
+        />
+      </div>
       <Config />
     </div>
   )

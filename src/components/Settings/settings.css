@@ -19,7 +19,7 @@ img {
   -ms-user-select: none;
 }
 
-.Settings .MenuItem {
+.SettingsScreen .MenuItem {
   text-align: left;
   font-size: small;
   width: 80%;
@@ -29,7 +29,7 @@ img {
   cursor: default;
 }
 
-.Settings {
+.SettingsScreen {
   width: 100%;
   height: 100vh;
 }
