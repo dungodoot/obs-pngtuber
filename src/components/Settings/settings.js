@@ -201,7 +201,7 @@ function Settings() {
   return (
     <div className='Settings'>
       <div
-        className='SettingsScreen'
+        className={isConfigOpen ? 'SettingsScreen hidden' : 'SettingsScreen'}
       >
         <InputSelect
           inputNames={JSON.parse(inputNames)}
