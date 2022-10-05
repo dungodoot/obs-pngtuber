@@ -6,7 +6,7 @@ import OBSWebSocket, {EventSubscription} from 'obs-websocket-js';
 const ThresholdSlider = () => {
   const [value, setValue] = useState(-35);
 
-  const handleChange = (event, newValue) => {
+  const handleChange = (e, newValue) => {
     setValue(newValue);
     localStorage.setItem('threshold', newValue)
   };
@@ -82,7 +82,7 @@ const ImageUpload = ({imageType}) => {
   )
 }
 
-const ServerPortInput = () => {
+function ServerPortInput() {
   const [value, setValue] = useState('');
   const handleChange = async (e) => {
     setValue(e.target.value);
@@ -116,6 +116,39 @@ function ServerPasswordInput() {
         value={localStorage.serverPassword}
         onChange={handleChange}
       />
+    </div>
+  )
+}
+
+function Config() {
+  const [value, setValue] = useState(false);
+
+  function ConfigButton() {
+    const handleClick = (e) => {
+      setValue(!value);
+      console.log(value);
+    }
+  
+    return (
+      <div
+        className='ConfigButton'
+        onClick={handleClick}
+      >
+        <img src={process.env.PUBLIC_URL + (value ? '/close-line.svg' : '/settings-3-fill.svg')} />
+      </div>
+    )
+  }
+
+  return (
+    <div className='Config'>
+      <div
+        className='ConfigScreen'
+        style={value ? {} : {visibility: 'hidden', opacity: 0, transform: 'scale(1.2)'}}
+      >
+        <ServerPortInput />
+        <ServerPasswordInput />
+      </div>
+      <ConfigButton />
     </div>
   )
 }
@@ -185,8 +218,10 @@ function Settings() {
       <ImageUpload
         imageType='inactive'
       />
-      <ServerPortInput />
-      <ServerPasswordInput />
+      {/* <ServerPortInput />
+      <ServerPasswordInput /> */}
+
+      <Config />
     </div>
   )
 }
