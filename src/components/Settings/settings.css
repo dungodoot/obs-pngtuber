@@ -34,7 +34,7 @@ img {
   height: 100vh;
 }
 
-.ConfigScreen {
+.Config {
   width: 100%;
   height: 100vh;
   position: absolute;
@@ -42,7 +42,22 @@ img {
   left: 0px;
   background-color: #2b2e38;
   transition: visibility 0.2s, opacity 0.2s, transform 0.2s;
-  overflow:hidden;
+}
+
+.hidden {
+  visibility: hidden;
+  opacity: 0;
+  transform: scale(1.2);
+}
+
+.Config .MenuItem {
+  text-align: left;
+  font-size: small;
+  width: 80%;
+  max-width: 500px;
+  margin: auto;
+  height: 20%;
+  cursor: default;
 }
 
 .ConfigButton {

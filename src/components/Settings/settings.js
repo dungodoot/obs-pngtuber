@@ -120,39 +120,31 @@ function ServerPasswordInput() {
   )
 }
 
+function Config({isConfigOpen}) {
+  return (
+    <div className={isConfigOpen ? 'Config' : 'Config hidden'}>
+      <ServerPortInput />
+      <ServerPasswordInput />
+    </div>
+  )
+}
+
 function Settings() {
   const [inputNames, setInputNames] = useState('[]');
+  const [isConfigOpen, setConfigOpen] = useState(false);
   const obs = new OBSWebSocket();
 
-  function Config() {
-    const [value, setValue] = useState(false);
-  
-    function ConfigButton() {
-      const handleClick = (e) => {
-        setValue(!value);
-        console.log(value);
-      }
-    
-      return (
-        <div
-          className='ConfigButton'
-          onClick={handleClick}
-        >
-          <img src={process.env.PUBLIC_URL + (value ? '/close-line.svg' : '/settings-3-fill.svg')} />
-        </div>
-      )
+  function ConfigButton() {
+    const handleClick = (e) => {
+      setConfigOpen(!isConfigOpen);
     }
   
     return (
-      <div className='Config'>
-        <div
-          className='ConfigScreen'
-          style={value ? {} : {visibility: 'hidden', opacity: 0, transform: 'scale(1.2)'}}
-        >
-          <ServerPortInput />
-          <ServerPasswordInput />
-        </div>
-        <ConfigButton />
+      <div
+        className='ConfigButton'
+        onClick={handleClick}
+      >
+        <img src={process.env.PUBLIC_URL + (isConfigOpen ? '/close-line.svg' : '/settings-3-fill.svg')} />
       </div>
     )
   }
@@ -208,7 +200,9 @@ function Settings() {
   
   return (
     <div className='Settings'>
-      <div className='SettingsScreen'>
+      <div
+        className='SettingsScreen'
+      >
         <InputSelect
           inputNames={JSON.parse(inputNames)}
         />
@@ -220,7 +214,10 @@ function Settings() {
           imageType='inactive'
         />
       </div>
-      <Config />
+      <Config
+        isConfigOpen={isConfigOpen}
+      />
+      <ConfigButton />
     </div>
   )
 }
