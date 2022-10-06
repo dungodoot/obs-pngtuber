@@ -1,30 +1,44 @@
 import './settings.css';
 import React, { useEffect, useState } from 'react';
-import { Slider } from '@mui/material';
 import OBSWebSocket, {EventSubscription} from 'obs-websocket-js';
 
-const ThresholdSlider = () => {
-  const [value, setValue] = useState(-35);
+function ThresholdSlider() {
+  const [value, setValue] = useState(parseFloat(localStorage.threshold));
 
-  const handleChange = (e, newValue) => {
-    setValue(newValue);
-    localStorage.setItem('threshold', newValue)
-  };
-
+  const handleChange = (e) => {
+    setValue(e.target.value);
+    localStorage.setItem('threshold', e.target.value);
+    console.log(e.target.value);
+  }
   return (
-    <div className='ThresholdSlider MenuItem'>
-      <p>Activation Threshold</p>
-      <Slider
-        aria-label='Volume threshold'
-        value={parseFloat(localStorage.threshold)}
-        step={0.5}
-        min={-60}
-        max={0}
-        onChange={handleChange}
-      />
+    <div className='ThresholdSlider'>
+      <div className='SliderWrapper'>
+        <div className='SliderRail' />
+        <div
+          className='SliderTrack'
+          style={{width: String(value) + '%'}}
+        />
+        <input
+          type='range'
+          value={parseFloat(localStorage.threshold)}
+          step='0.5'
+          onChange={handleChange}
+        />
+      </div>
     </div>
-  );
-};
+  )
+}
+
+function ThresholdSelect() {
+  return (
+    <div className='ThresholdSelect MenuItem'>
+      <p>
+        Activation Threshold
+      </p>
+      <ThresholdSlider />
+    </div>
+  )
+}
 
 function InputSelect ({inputNames}) {
   const [value, setValue] = useState('');
@@ -206,7 +220,7 @@ function Settings() {
         <InputSelect
           inputNames={JSON.parse(inputNames)}
         />
-        <ThresholdSlider />
+        <ThresholdSelect />
         <ImageUpload 
           imageType='speaking'
         />

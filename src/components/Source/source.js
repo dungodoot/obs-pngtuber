@@ -10,7 +10,7 @@ function Source() {
   function onInput(event) {
     for (const input in event.inputs) {
       if (localStorage.input == event.inputs[input].inputName) {
-        if (20*Math.log10(event.inputs[input].inputLevelsMul[0][0]) > localStorage['threshold']) {
+        if (20*Math.log10(event.inputs[input].inputLevelsMul[0][0]) + 60 > localStorage['threshold']) {
           setSpeaking(true);
         } else {
           setSpeaking(false);
