@@ -73,6 +73,82 @@ function InputSelect ({inputNames}) {
   )
 }
 
+function MicSettings () {
+  const [volume, setVolume] = useState(0);
+  const [inputNames, setInputNames] = useState('[]');
+  const obs = new OBSWebSocket();
+
+  async function updateInputs(e) {
+    console.log(e);
+    const inputList = await obs.call('GetInputList', {inputKind: 'coreaudio_input_capture'});
+    var inputNames = [];
+    for (const input in inputList.inputs) {
+      inputNames.push(inputList.inputs[input].inputName);
+    }
+    setInputNames(JSON.stringify(inputNames));
+  }
+
+  async function updateInputName(e) {
+    updateInputs(e);
+    if (e.oldInputName == localStorage.input) {
+      localStorage.setItem('input', e.inputName);
+      console.log(`Input renamed from ${e.oldInputName} to ${e.inputName}`);
+    }
+  }
+
+  function onInput(e) {
+    for (const input in e.inputs) {
+      if (localStorage.input == e.inputs[input].inputName) {
+        const vol = 20*Math.log10(e.inputs[input].inputLevelsMul[0][0]) + 60;
+        setVolume(vol > 0 ? vol : 0);
+      }
+    }
+  }
+
+  useEffect(() => {
+    (async function connectOBS() {
+      try {
+        const {
+          obsWebSocketVersion,
+          negotiatedRpcVersion
+        } = await obs.connect(`ws://127.0.0.1:${localStorage.serverPort}`, `${localStorage.serverPassword}`, {
+          eventSubscriptions: EventSubscription.Inputs | EventSubscription.InputVolumeMeters,
+          rpcVersion: 1
+        });
+        console.log(`Connected to server ${obsWebSocketVersion} (using RPC ${negotiatedRpcVersion})`);
+        obs.on('InputCreated', updateInputs);
+        obs.on('InputRemoved', updateInputs);
+        obs.on('InputNameChanged', updateInputName);
+        obs.on('InputVolumeMeters', onInput);
+
+        const inputList = await obs.call('GetInputList', {inputKind: 'coreaudio_input_capture'});
+        var inputNames = [];
+        for (const input in inputList.inputs) {
+          inputNames.push(inputList.inputs[input].inputName);
+        }
+        setInputNames(JSON.stringify(inputNames));
+      } catch (error) {
+        console.error('Failed to connect', error.code, error.message);
+        const interval = setInterval(() => {
+          connectOBS();
+          clearInterval(interval);
+        }, 1000);
+      }
+    })();
+  }, []);
+
+  return (
+    <div className='MicSettings'>
+      <InputSelect
+        inputNames={JSON.parse(inputNames)}
+      />
+      <ThresholdSelect
+        volume={volume}
+      />
+    </div>
+  )
+}
+
 const ImageUpload = ({imageType}) => {
   const convertToBase64 = (file) => {
     return new Promise((resolve, reject) => {
@@ -153,14 +229,12 @@ function Config({isConfigOpen}) {
 }
 
 function Settings() {
-  const [volume, setVolume] = useState(0);
-  const [inputNames, setInputNames] = useState('[]');
   const [isConfigOpen, setConfigOpen] = useState(false);
-  const obs = new OBSWebSocket();
 
   function ConfigButton() {
     const handleClick = (e) => {
       setConfigOpen(!isConfigOpen);
+      console.log('toggle')
     }
   
     return (
@@ -172,77 +246,13 @@ function Settings() {
       </div>
     )
   }
-
-  async function updateInputs(e) {
-    console.log(e);
-    const inputList = await obs.call('GetInputList', {inputKind: 'coreaudio_input_capture'});
-    var inputNames = [];
-    for (const input in inputList.inputs) {
-      inputNames.push(inputList.inputs[input].inputName);
-    }
-    setInputNames(JSON.stringify(inputNames));
-  }
-
-  async function updateInputName(e) {
-    updateInputs(e);
-    if (e.oldInputName == localStorage.input) {
-      localStorage.setItem('input', e.inputName);
-      console.log(`Input renamed from ${e.oldInputName} to ${e.inputName}`);
-    }
-  }
-
-  function onInput(e) {
-    for (const input in e.inputs) {
-      if (localStorage.input == e.inputs[input].inputName) {
-        const vol = 20*Math.log10(e.inputs[input].inputLevelsMul[0][0]) + 60;
-        setVolume(vol > 0 ? vol : 0);
-      }
-    }
-  }
-
-  useEffect(() => {
-    (async function connectOBS() {
-      try {
-        const {
-          obsWebSocketVersion,
-          negotiatedRpcVersion
-        } = await obs.connect(`ws://127.0.0.1:${localStorage.serverPort}`, `${localStorage.serverPassword}`, {
-          eventSubscriptions: EventSubscription.Inputs | EventSubscription.InputVolumeMeters,
-          rpcVersion: 1
-        });
-        console.log(`Connected to server ${obsWebSocketVersion} (using RPC ${negotiatedRpcVersion})`);
-        obs.on('InputCreated', updateInputs);
-        obs.on('InputRemoved', updateInputs);
-        obs.on('InputNameChanged', updateInputName);
-        obs.on('InputVolumeMeters', onInput);
-
-        const inputList = await obs.call('GetInputList', {inputKind: 'coreaudio_input_capture'});
-        var inputNames = [];
-        for (const input in inputList.inputs) {
-          inputNames.push(inputList.inputs[input].inputName);
-        }
-        setInputNames(JSON.stringify(inputNames));
-      } catch (error) {
-        console.error('Failed to connect', error.code, error.message);
-        const interval = setInterval(() => {
-          connectOBS();
-          clearInterval(interval);
-        }, 1000);
-      }
-    })();
-  }, []);
   
   return (
     <div className='Settings'>
       <div
         className={isConfigOpen ? 'SettingsScreen hidden' : 'SettingsScreen'}
       >
-        <InputSelect
-          inputNames={JSON.parse(inputNames)}
-        />
-        <ThresholdSelect
-          volume={volume}
-        />
+        <MicSettings />
         <ImageUpload 
           imageType='speaking'
         />
