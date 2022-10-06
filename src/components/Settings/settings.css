@@ -131,9 +131,27 @@ img {
 }
 
 .SliderTrack {
-  height: 5px;
+  width: 0%;
+  height: 100%;
   position: relative;
   top: 0px;
   background-color: #73bd32;
   border-radius: 2px;
+}
+
+.VolumeIndicatorContainer {
+  height: 100%;
+  width: 100%;
+  position: absolute;
+  top: 0px;
+  overflow: hidden;
+}
+
+.VolumeIndicator {
+  height: 100%;
+  width: 110%;
+  position: relative;
+  background-color: black;
+  opacity: 50%;
+  transition: left 0.05s;
 }

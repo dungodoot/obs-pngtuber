@@ -2,7 +2,7 @@ import './settings.css';
 import React, { useEffect, useState } from 'react';
 import OBSWebSocket, {EventSubscription} from 'obs-websocket-js';
 
-function ThresholdSlider() {
+function ThresholdSlider({volume}) {
   const [value, setValue] = useState(parseFloat(localStorage.threshold));
 
   const handleChange = (e) => {
@@ -13,11 +13,18 @@ function ThresholdSlider() {
   return (
     <div className='ThresholdSlider'>
       <div className='SliderWrapper'>
-        <div className='SliderRail' />
-        <div
-          className='SliderTrack'
-          style={{width: String(value) + '%'}}
-        />
+        <div className='SliderRail'>
+          <div
+            className='SliderTrack'
+            style={{width: String(value) + '%'}}
+          />
+          <div className='VolumeIndicatorContainer'>
+            <div
+              className='VolumeIndicator'
+              style={{left: String(volume) + '%'}}
+            />
+          </div>
+        </div>
         <input
           type='range'
           value={parseFloat(localStorage.threshold)}
@@ -29,13 +36,15 @@ function ThresholdSlider() {
   )
 }
 
-function ThresholdSelect() {
+function ThresholdSelect({volume}) {
   return (
     <div className='ThresholdSelect MenuItem'>
       <p>
         Activation Threshold
       </p>
-      <ThresholdSlider />
+      <ThresholdSlider
+        volume={volume}
+      />
     </div>
   )
 }
@@ -144,6 +153,7 @@ function Config({isConfigOpen}) {
 }
 
 function Settings() {
+  const [volume, setVolume] = useState(0);
   const [inputNames, setInputNames] = useState('[]');
   const [isConfigOpen, setConfigOpen] = useState(false);
   const obs = new OBSWebSocket();
@@ -181,6 +191,15 @@ function Settings() {
     }
   }
 
+  function onInput(e) {
+    for (const input in e.inputs) {
+      if (localStorage.input == e.inputs[input].inputName) {
+        const vol = 20*Math.log10(e.inputs[input].inputLevelsMul[0][0]) + 60;
+        setVolume(vol > 0 ? vol : 0);
+      }
+    }
+  }
+
   useEffect(() => {
     (async function connectOBS() {
       try {
@@ -188,13 +207,14 @@ function Settings() {
           obsWebSocketVersion,
           negotiatedRpcVersion
         } = await obs.connect(`ws://127.0.0.1:${localStorage.serverPort}`, `${localStorage.serverPassword}`, {
-          eventSubscriptions: EventSubscription.Inputs,
+          eventSubscriptions: EventSubscription.Inputs | EventSubscription.InputVolumeMeters,
           rpcVersion: 1
         });
         console.log(`Connected to server ${obsWebSocketVersion} (using RPC ${negotiatedRpcVersion})`);
         obs.on('InputCreated', updateInputs);
         obs.on('InputRemoved', updateInputs);
         obs.on('InputNameChanged', updateInputName);
+        obs.on('InputVolumeMeters', onInput);
 
         const inputList = await obs.call('GetInputList', {inputKind: 'coreaudio_input_capture'});
         var inputNames = [];
@@ -220,7 +240,9 @@ function Settings() {
         <InputSelect
           inputNames={JSON.parse(inputNames)}
         />
-        <ThresholdSelect />
+        <ThresholdSelect
+          volume={volume}
+        />
         <ImageUpload 
           imageType='speaking'
         />

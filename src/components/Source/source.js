@@ -7,10 +7,10 @@ function Source() {
   const [animating, setAnimating] = useState(false);
   const obs = new OBSWebSocket();
 
-  function onInput(event) {
-    for (const input in event.inputs) {
-      if (localStorage.input == event.inputs[input].inputName) {
-        if (20*Math.log10(event.inputs[input].inputLevelsMul[0][0]) + 60 > localStorage['threshold']) {
+  function onInput(e) {
+    for (const input in e.inputs) {
+      if (localStorage.input == e.inputs[input].inputName) {
+        if (20*Math.log10(e.inputs[input].inputLevelsMul[0][0]) + 60 > localStorage['threshold']) {
           setSpeaking(true);
         } else {
           setSpeaking(false);
