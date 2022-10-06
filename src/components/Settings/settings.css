@@ -82,10 +82,22 @@ img {
 }
 
 .ConfigButton img {
-  position: relative;
+  position: absolute;
+  right: 5px;
   top: 5px;
+  transform: rotate(0deg);
+  rotate: -180deg;
+  transition: transform 0.4s, opacity 0.2s;
+  transition-delay: rotate 0.2s;
 }
 
+.ConfigButton img.hide {
+  transform: rotate(-180deg);
+  rotate: 0deg;
+  opacity: 0%;
+  transition: rotate 0.4s, opacity 0.2s;
+  transition-delay: transform 0.2s;
+}
 
 .MenuItem select {
   width: 90%;

@@ -228,23 +228,34 @@ function Config({isConfigOpen}) {
   )
 }
 
+function ConfigButton({onClick, isConfigOpen}) {
+ 
+  return (
+    <div
+      className='ConfigButton'
+      onClick={onClick}
+    >
+      {/* <img src={process.env.PUBLIC_URL + (isConfigOpen ? '/close-line.svg' : '/settings-3-fill.svg')} /> */}
+      <img
+        className={isConfigOpen ? 'hide icon' : 'icon'}
+        src={process.env.PUBLIC_URL + '/settings-3-fill.svg'}
+        key='1'
+      />
+      <img
+        className={isConfigOpen ? 'icon' : 'hide icon'}
+        src={process.env.PUBLIC_URL + '/close-line.svg'}
+        key='2'
+      />
+    </div>
+  )
+}
+
 function Settings() {
   const [isConfigOpen, setConfigOpen] = useState(false);
 
-  function ConfigButton() {
-    const handleClick = (e) => {
-      setConfigOpen(!isConfigOpen);
-      console.log('toggle')
-    }
-  
-    return (
-      <div
-        className='ConfigButton'
-        onClick={handleClick}
-      >
-        <img src={process.env.PUBLIC_URL + (isConfigOpen ? '/close-line.svg' : '/settings-3-fill.svg')} />
-      </div>
-    )
+  const handleClick = (e) => {
+    setConfigOpen(!isConfigOpen);
+    console.log('toggle')
   }
   
   return (
@@ -263,7 +274,10 @@ function Settings() {
       <Config
         isConfigOpen={isConfigOpen}
       />
-      <ConfigButton />
+      <ConfigButton
+        onClick={handleClick}
+        isConfigOpen={isConfigOpen}
+      />
     </div>
   )
 }
