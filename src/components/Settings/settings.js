@@ -225,7 +225,7 @@ function ImageSelectTab({openMenu}) {
     var isOpen = true;
   }
   return (
-    <div className={isOpen ? 'ImageSelectTab' : 'ImageSelectTab hidden'}>
+    <div className={isOpen ? 'ImageSelectTab SettingsTab' : 'ImageSelectTab SettingsTab hidden'}>
       <ImageUpload 
         imageType='speaking'
       />
@@ -333,7 +333,7 @@ function Settings() {
       />
       <div className='SettingsContainer'>
         <div
-          className={openMenu == 0 ? 'HomeTab' : 'HomeTab hidden'}
+          className={openMenu == 0 ? 'HomeTab SettingsTab' : 'HomeTab SettingsTab hidden'}
         >
           <MicSettings />
         </div>
