@@ -304,7 +304,7 @@ function NavBar({openHome, openConfig, openImageSelect, openAnimation}) {
   return (
     <div className='NavBar'>
       <TabButton onClick={openHome}>
-        <MdOutlineVolumeUp />
+        <MdVolumeUp />
       </TabButton>
 
       <TabButton onClick={openImageSelect}>
