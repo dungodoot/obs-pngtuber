@@ -1,4 +1,5 @@
 import './settings.css';
+import './slider.css';
 import React, { useEffect, useState } from 'react';
 import OBSWebSocket, {EventSubscription} from 'obs-websocket-js';
 import { MdFace, MdAnimation, MdHandyman, MdMic } from "react-icons/md";
