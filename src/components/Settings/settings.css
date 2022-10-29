@@ -19,7 +19,7 @@ img {
   -ms-user-select: none;
 }
 
-.HomeTab .MenuItem {
+.MenuItem {
   text-align: left;
   font-size: small;
   width: 80%;
@@ -34,16 +34,21 @@ img {
   height: 100vh;
 }
 
-.HomeTab.hidden {
-  display: none;
-}
-
 .ConfigTab {
   width: 100%;
   height: 100vh;
   position: relative;
   top: 0px;
   background-color: #2b2e38;
+}
+
+.ImageSelectTab {
+  width: 100%;
+  height: 100vh;
+}
+
+.hidden {
+  display: none;
 }
 
 .ConfigTab .MenuItem {

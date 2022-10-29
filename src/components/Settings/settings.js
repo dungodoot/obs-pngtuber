@@ -1,6 +1,7 @@
 import './settings.css';
 import React, { useEffect, useState } from 'react';
 import OBSWebSocket, {EventSubscription} from 'obs-websocket-js';
+import { MdFace, MdAnimation } from "react-icons/md";
 
 function ThresholdSlider({volume}) {
   const [value, setValue] = useState(parseFloat(localStorage.threshold));
@@ -219,16 +220,35 @@ function ServerPasswordInput() {
   )
 }
 
-function ConfigTab({isConfigOpen}) {
+function ImageSelectTab({openMenu}) {
+  if (openMenu == 1) {
+    var isOpen = true;
+  }
   return (
-    <div className={isConfigOpen ? 'ConfigTab' : 'ConfigTab hidden'}>
+    <div className={isOpen ? 'ImageSelectTab' : 'ImageSelectTab hidden'}>
+      <ImageUpload 
+        imageType='speaking'
+      />
+      <ImageUpload
+        imageType='inactive'
+      />
+    </div>
+  )
+}
+
+function ConfigTab({openMenu}) {
+  if (openMenu == 4) {
+    var isOpen = true;
+  }
+  return (
+    <div className={isOpen ? 'ConfigTab' : 'ConfigTab hidden'}>
       <ServerPortInput />
       <ServerPasswordInput />
     </div>
   )
 }
 
-function HomeButton({onClick, isHomeOpen}) {
+function HomeButton({onClick}) {
   return (
     <div
       className='HomeButton Button'
@@ -242,25 +262,41 @@ function HomeButton({onClick, isHomeOpen}) {
   )
 }
 
-function ConfigButton({onClick, isConfigOpen}) {
+function ConfigButton({onClick}) {
   return (
     <div
       className='ConfigButton Button'
       onClick={onClick}
     >
       <img
-        className={isConfigOpen ? 'hide icon' : 'icon'}
+        className='icon'
         src={process.env.PUBLIC_URL + '/settings-3-fill.svg'}
       />
     </div>
   )
 }
 
-function NavBar({openHome, openConfig}) {
+function ImageSelectButton({onClick}) {
+  return (
+    <div
+      className='ImageSelectButton Button'
+      onClick={onClick}
+    >
+      <MdFace
+        className='icon'
+      />
+    </div>
+  )
+}
+
+function NavBar({openHome, openConfig, openImageSelect}) {
   return (
     <div className='NavBar'>
       <HomeButton
         onClick={openHome}
+      />
+      <ImageSelectButton
+        onClick={openImageSelect}
       />
       <ConfigButton
         onClick={openConfig}
@@ -271,14 +307,20 @@ function NavBar({openHome, openConfig}) {
 
 function Settings() {
   const [openMenu, setOpenMenu] = useState(0);
-  // home - 0
-  // config - 1
+  // 0 - home
+  // 1 - image select
+  // 3 - config
+
 
   const openHome = () => {
     setOpenMenu(0);
   }
 
   const openConfig = () => {
+    setOpenMenu(4);
+  }
+
+  const openImageSelect = () => {
     setOpenMenu(1);
   }
   
@@ -287,21 +329,19 @@ function Settings() {
       <NavBar
         openHome={openHome}
         openConfig={openConfig}
+        openImageSelect={openImageSelect}
       />
       <div className='SettingsContainer'>
         <div
           className={openMenu == 0 ? 'HomeTab' : 'HomeTab hidden'}
         >
           <MicSettings />
-          <ImageUpload 
-            imageType='speaking'
-          />
-          <ImageUpload
-            imageType='inactive'
-          />
         </div>
         <ConfigTab
-          isConfigOpen={openMenu == 1}
+          openMenu={openMenu}
+        />
+        <ImageSelectTab
+          openMenu={openMenu}
         />
       </div>
     </div>
