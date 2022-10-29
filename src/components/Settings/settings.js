@@ -1,7 +1,7 @@
 import './settings.css';
 import React, { useEffect, useState } from 'react';
 import OBSWebSocket, {EventSubscription} from 'obs-websocket-js';
-import { MdFace, MdAnimation } from "react-icons/md";
+import { MdFace, MdHandyman, MdOutlineVolumeUp } from "react-icons/md";
 
 function ThresholdSlider({volume}) {
   const [value, setValue] = useState(parseFloat(localStorage.threshold));
@@ -241,9 +241,20 @@ function ConfigTab({openMenu}) {
     var isOpen = true;
   }
   return (
-    <div className={isOpen ? 'ConfigTab' : 'ConfigTab hidden'}>
+    <div className={isOpen ? 'ConfigTab SettingsTab' : 'ConfigTab SettingsTab hidden'}>
       <ServerPortInput />
       <ServerPasswordInput />
+    </div>
+  )
+}
+
+function TabButton({onClick, children}) {
+  return (
+    <div
+      className='Button'
+      onClick={onClick}
+    >
+      {children}
     </div>
   )
 }
@@ -292,15 +303,17 @@ function ImageSelectButton({onClick}) {
 function NavBar({openHome, openConfig, openImageSelect}) {
   return (
     <div className='NavBar'>
-      <HomeButton
-        onClick={openHome}
-      />
-      <ImageSelectButton
-        onClick={openImageSelect}
-      />
-      <ConfigButton
-        onClick={openConfig}
-      />
+      <TabButton onClick={openHome}>
+        <MdOutlineVolumeUp />
+      </TabButton>
+
+      <TabButton onClick={openImageSelect}>
+        <MdFace />
+      </TabButton>
+
+      <TabButton onClick={openConfig}>
+        <MdHandyman />
+      </TabButton>
     </div>
   )
 }
@@ -309,7 +322,7 @@ function Settings() {
   const [openMenu, setOpenMenu] = useState(0);
   // 0 - home
   // 1 - image select
-  // 3 - config
+  // 4 - config
 
 
   const openHome = () => {
