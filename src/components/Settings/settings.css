@@ -25,8 +25,30 @@ img {
   width: 80%;
   max-width: 500px;
   margin: auto;
-  height: 20%;
   cursor: default;
+}
+
+.ImageUpload input[type=file] {
+  display: none;
+}
+
+.ImageWrapper {
+  position: relative;
+  height: 20vh;
+  width: 20vh;
+  background-color: #2b2e38;
+  border-radius: 5px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.ImageWrapper img {
+  height: 100%;
+}
+
+.ImageWrapper:hover {
+  filter: brightness(50%);
 }
 
 .SettingsTab {
@@ -44,16 +66,6 @@ img {
 
 .hidden {
   display: none;
-}
-
-.ConfigTab .MenuItem {
-  text-align: left;
-  font-size: small;
-  width: 80%;
-  max-width: 500px;
-  margin: auto;
-  height: 20%;
-  cursor: default;
 }
 
 .MenuItem select {

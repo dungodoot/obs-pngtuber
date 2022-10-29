@@ -151,6 +151,8 @@ function MicSettings () {
 }
 
 const ImageUpload = ({imageType}) => {
+  const [image, setImage] = useState(imageType == 'speaking' ? localStorage.speakImage : localStorage.inactiveImage);
+
   const convertToBase64 = (file) => {
     return new Promise((resolve, reject) => {
       const fileReader = new FileReader();
@@ -172,11 +174,19 @@ const ImageUpload = ({imageType}) => {
     } else if (imageType == 'inactive'){
       localStorage.setItem('inactiveImage', base64);
     }
+    setImage(base64);
   };
 
   return (
     <div className='ImageUpload MenuItem'>
       <p>{imageType == 'speaking' ? 'Speaking Image' : 'Inactive Image'}</p>
+      <label for={imageType == 'speaking' ? 'speaking' : 'inactive'}>
+        <div className='ImageWrapper'>
+          <img
+            src={imageType == 'speaking' ? localStorage.speakImage : localStorage.inactiveImage}
+          />
+        </div>
+      </label>
       <input type='file' id={imageType == 'speaking' ? 'speaking' : 'inactive'} onChange={(e) => handleChange(e)} title='a' />
     </div>
   )
@@ -300,7 +310,7 @@ function ImageSelectButton({onClick}) {
   )
 }
 
-function NavBar({openHome, openConfig, openImageSelect, openAnimation}) {
+function NavBar({openHome, openConfig, openImageSelect}) {
   return (
     <div className='NavBar'>
       <TabButton onClick={openHome}>
@@ -309,10 +319,6 @@ function NavBar({openHome, openConfig, openImageSelect, openAnimation}) {
 
       <TabButton onClick={openImageSelect}>
         <MdFace />
-      </TabButton>
-
-      <TabButton onClick={openAnimation}>
-        <MdAnimation />
       </TabButton>
 
       <TabButton onClick={openConfig}>
