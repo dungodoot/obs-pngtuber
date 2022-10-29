@@ -269,47 +269,6 @@ function TabButton({onClick, children}) {
   )
 }
 
-function HomeButton({onClick}) {
-  return (
-    <div
-      className='HomeButton Button'
-      onClick={onClick}
-    >
-      <img
-        className='icon'
-        src={process.env.PUBLIC_URL + '/home-2-fill.svg'}
-      />
-    </div>
-  )
-}
-
-function ConfigButton({onClick}) {
-  return (
-    <div
-      className='ConfigButton Button'
-      onClick={onClick}
-    >
-      <img
-        className='icon'
-        src={process.env.PUBLIC_URL + '/settings-3-fill.svg'}
-      />
-    </div>
-  )
-}
-
-function ImageSelectButton({onClick}) {
-  return (
-    <div
-      className='ImageSelectButton Button'
-      onClick={onClick}
-    >
-      <MdFace
-        className='icon'
-      />
-    </div>
-  )
-}
-
 function NavBar({openHome, openConfig, openImageSelect}) {
   return (
     <div className='NavBar'>
