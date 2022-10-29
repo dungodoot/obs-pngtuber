@@ -1,7 +1,7 @@
 import './settings.css';
 import React, { useEffect, useState } from 'react';
 import OBSWebSocket, {EventSubscription} from 'obs-websocket-js';
-import { MdFace, MdAnimation, MdHandyman, MdVolumeUp } from "react-icons/md";
+import { MdFace, MdAnimation, MdHandyman, MdMic } from "react-icons/md";
 
 function ThresholdSlider({volume}) {
   const [value, setValue] = useState(parseFloat(localStorage.threshold));
@@ -269,15 +269,19 @@ function TabButton({onClick, children}) {
   )
 }
 
-function NavBar({openHome, openConfig, openImageSelect}) {
+function NavBar({openHome, openConfig, openImageSelect, openAnimation}) {
   return (
     <div className='NavBar'>
       <TabButton onClick={openHome}>
-        <MdVolumeUp />
+        <MdMic />
       </TabButton>
 
       <TabButton onClick={openImageSelect}>
         <MdFace />
+      </TabButton>
+
+      <TabButton onClick={openAnimation}>
+        <MdAnimation />
       </TabButton>
 
       <TabButton onClick={openConfig}>
