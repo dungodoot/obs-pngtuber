@@ -256,6 +256,10 @@ function AnimationTab({openMenu}) {
     localStorage.setItem('bounce', e.target.checked);
   }
 
+  const handleChangeDarken = (e) => {
+    localStorage.setItem('darken', e.target.checked);
+  }
+
   return (
     <div className={isOpen ? 'AnimationTab SettingsTab' : 'AnimationTab SettingsTab hidden'}>
       <div className='MenuItem'>
@@ -263,6 +267,13 @@ function AnimationTab({openMenu}) {
         <input
           type='checkbox'
           onChange={handleChange}
+        />
+      </div>
+      <div className='MenuItem'>
+        <p>Darken</p>
+        <input
+          type='checkbox'
+          onChange={handleChangeDarken}
         />
       </div>
     </div>
