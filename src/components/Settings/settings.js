@@ -228,56 +228,82 @@ function Config({isConfigOpen}) {
   )
 }
 
-function ConfigButton({onClick, isConfigOpen}) {
- 
+function HomeButton({onClick, isHomeOpen}) {
   return (
     <div
-      className='ConfigButton'
+      className='HomeButton Button'
       onClick={onClick}
     >
-      {/* <img src={process.env.PUBLIC_URL + (isConfigOpen ? '/close-line.svg' : '/settings-3-fill.svg')} /> */}
+      <img
+        className='icon'
+        src={process.env.PUBLIC_URL + '/home-2-fill.svg'}
+      />
+    </div>
+  )
+}
+
+function ConfigButton({onClick, isConfigOpen}) {
+  return (
+    <div
+      className='ConfigButton Button'
+      onClick={onClick}
+    >
       <img
         className={isConfigOpen ? 'hide icon' : 'icon'}
         src={process.env.PUBLIC_URL + '/settings-3-fill.svg'}
-        key='1'
       />
-      <img
-        className={isConfigOpen ? 'icon' : 'hide icon'}
-        src={process.env.PUBLIC_URL + '/close-line.svg'}
-        key='2'
+    </div>
+  )
+}
+
+function NavBar({openHome, openConfig}) {
+  return (
+    <div className='NavBar'>
+      <HomeButton
+        onClick={openHome}
+      />
+      <ConfigButton
+        onClick={openConfig}
       />
     </div>
   )
 }
 
 function Settings() {
-  const [isConfigOpen, setConfigOpen] = useState(false);
+  const [openMenu, setOpenMenu] = useState(0);
+  // home - 0
+  // config - 1
 
-  const handleClick = (e) => {
-    setConfigOpen(!isConfigOpen);
-    console.log('toggle')
+  const openHome = (e) => {
+    setOpenMenu(0);
+  }
+
+  const openConfig = (e) => {
+    setOpenMenu(1);
   }
   
   return (
     <div className='Settings'>
-      <div
-        className={isConfigOpen ? 'SettingsScreen hidden' : 'SettingsScreen'}
-      >
-        <MicSettings />
-        <ImageUpload 
-          imageType='speaking'
-        />
-        <ImageUpload
-          imageType='inactive'
+      <NavBar
+        openHome={openHome}
+        openConfig={openConfig}
+      />
+      <div className='SettingsContainer'>
+        <div
+          className={openMenu == 0 ? 'SettingsScreen' : 'SettingsScreen hidden'}
+        >
+          <MicSettings />
+          <ImageUpload 
+            imageType='speaking'
+          />
+          <ImageUpload
+            imageType='inactive'
+          />
+        </div>
+        <Config
+          isConfigOpen={openMenu == 1}
         />
       </div>
-      <Config
-        isConfigOpen={isConfigOpen}
-      />
-      <ConfigButton
-        onClick={handleClick}
-        isConfigOpen={isConfigOpen}
-      />
     </div>
   )
 }
