@@ -334,31 +334,14 @@ function Settings() {
   // 1 - image select
   // 2 - animation
   // 4 - config
-
-
-  const openHome = () => {
-    setOpenMenu(0);
-  }
-
-  const openConfig = () => {
-    setOpenMenu(4);
-  }
-
-  const openImageSelect = () => {
-    setOpenMenu(1);
-  }
-
-  const openAnimation = () => {
-    setOpenMenu(2);
-  }
   
   return (
     <div className='Settings'>
       <NavBar
-        openHome={openHome}
-        openConfig={openConfig}
-        openImageSelect={openImageSelect}
-        openAnimation={openAnimation}
+        openHome={() => setOpenMenu(0)}
+        openImageSelect={() => setOpenMenu(1)}
+        openAnimation={() => setOpenMenu(2)}
+        openConfig={() => setOpenMenu(4)}
       />
       <div className='SettingsContainer'>
         <div
