@@ -237,6 +237,7 @@ function ImageSelectTab({openMenu}) {
   }
   return (
     <div className={isOpen ? 'ImageSelectTab SettingsTab' : 'ImageSelectTab SettingsTab hidden'}>
+      <h1>Image Select</h1>
       <ImageUpload 
         imageType='speaking'
       />
@@ -262,6 +263,7 @@ function AnimationTab({openMenu}) {
 
   return (
     <div className={isOpen ? 'AnimationTab SettingsTab' : 'AnimationTab SettingsTab hidden'}>
+      <h1>Animation</h1>
       <div className='MenuItem'>
         <p>Bounce</p>
         <input
@@ -286,6 +288,7 @@ function ConfigTab({openMenu}) {
   }
   return (
     <div className={isOpen ? 'ConfigTab SettingsTab' : 'ConfigTab SettingsTab hidden'}>
+      <h1>Connection Settings</h1>
       <ServerPortInput />
       <ServerPasswordInput />
     </div>
@@ -361,6 +364,7 @@ function Settings() {
         <div
           className={openMenu == 0 ? 'HomeTab SettingsTab' : 'HomeTab SettingsTab hidden'}
         >
+          <h1>Input Settings</h1>
           <MicSettings />
         </div>
         <ConfigTab openMenu={openMenu}/>

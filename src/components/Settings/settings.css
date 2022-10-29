@@ -19,9 +19,17 @@ img {
   -ms-user-select: none;
 }
 
+.SettingsTab h1 {
+  text-align: left;
+  font-size: 1em;
+  width: 80%;
+  max-width: 500px;
+  margin-inline: auto;
+}
+
 .MenuItem {
   text-align: left;
-  font-size: small;
+  font-size: 0.8em;
   width: 80%;
   max-width: 500px;
   margin: auto;
