@@ -219,9 +219,9 @@ function ServerPasswordInput() {
   )
 }
 
-function Config({isConfigOpen}) {
+function ConfigTab({isConfigOpen}) {
   return (
-    <div className={isConfigOpen ? 'Config' : 'Config hidden'}>
+    <div className={isConfigOpen ? 'ConfigTab' : 'ConfigTab hidden'}>
       <ServerPortInput />
       <ServerPasswordInput />
     </div>
@@ -274,11 +274,11 @@ function Settings() {
   // home - 0
   // config - 1
 
-  const openHome = (e) => {
+  const openHome = () => {
     setOpenMenu(0);
   }
 
-  const openConfig = (e) => {
+  const openConfig = () => {
     setOpenMenu(1);
   }
   
@@ -290,7 +290,7 @@ function Settings() {
       />
       <div className='SettingsContainer'>
         <div
-          className={openMenu == 0 ? 'SettingsScreen' : 'SettingsScreen hidden'}
+          className={openMenu == 0 ? 'HomeTab' : 'HomeTab hidden'}
         >
           <MicSettings />
           <ImageUpload 
@@ -300,7 +300,7 @@ function Settings() {
             imageType='inactive'
           />
         </div>
-        <Config
+        <ConfigTab
           isConfigOpen={openMenu == 1}
         />
       </div>

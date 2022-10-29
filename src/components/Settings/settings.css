@@ -19,7 +19,7 @@ img {
   -ms-user-select: none;
 }
 
-.SettingsScreen .MenuItem {
+.HomeTab .MenuItem {
   text-align: left;
   font-size: small;
   width: 80%;
@@ -29,16 +29,16 @@ img {
   cursor: default;
 }
 
-.SettingsScreen {
+.HomeTab {
   width: 100%;
   height: 100vh;
 }
 
-.SettingsScreen.hidden {
+.HomeTab.hidden {
   display: none;
 }
 
-.Config {
+.ConfigTab {
   width: 100%;
   height: 100vh;
   position: relative;
@@ -46,7 +46,7 @@ img {
   background-color: #2b2e38;
 }
 
-.Config .MenuItem {
+.ConfigTab .MenuItem {
   text-align: left;
   font-size: small;
   width: 80%;
