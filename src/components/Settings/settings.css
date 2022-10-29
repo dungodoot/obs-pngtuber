@@ -73,53 +73,6 @@ img {
   max-width: 100px;
 }
 
-.SliderWrapper {
-  width: 100%;
-  height: 20px;
-  position: relative;
-}
-
-.SliderWrapper input[type=range] {
-  -webkit-appearance: none;
-  width: 100%;
-  height: 30px;
-  position: absolute;
-  top: -7.5px;
-  margin: auto;
-  background: transparent;
-}
-
-.SliderWrapper input[type=range]::-webkit-slider-thumb {
-  -webkit-appearance: none;
-  width: 10px;
-  height: 20px;
-  background: white;
-  border-radius: 2px;
-  outline: 2px solid #2b2e38;
-}
-
-.SliderWrapper input[type=range]::-webkit-slider-thumb:hover {
-  background: #c8c8c8;
-}
-
-.SliderRail {
-  width: 100%;
-  height: 5px;
-  background-color: #bd9008;
-  position: relative;
-  top: 5px;
-  border-radius: 2px;
-}
-
-.SliderTrack {
-  width: 0%;
-  height: 100%;
-  position: relative;
-  top: 0px;
-  background-color: #73bd32;
-  border-radius: 2px;
-}
-
 .VolumeIndicatorContainer {
   height: 100%;
   width: 100%;

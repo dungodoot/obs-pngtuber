@@ -12,7 +12,7 @@
   height: 100%;
 }
 
-.speaking {
+.speaking.bounce {
   animation: bounceAnimation 0.3s;
 }
 

@@ -42,7 +42,7 @@ function Source() {
   return (
     <div className="Source">
       <div
-        className={(speaking || animating) ? 'speaking avatar' : 'inactive avatar'}
+        className={((speaking || animating) ? 'speaking avatar' : 'inactive avatar') + (localStorage.bounce == 'true' ? ' bounce' : '')}
         onAnimationStart={() => setAnimating(true)}
         onAnimationEnd={() => setAnimating(false)}
       >

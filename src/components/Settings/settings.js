@@ -247,6 +247,28 @@ function ImageSelectTab({openMenu}) {
   )
 }
 
+function AnimationTab({openMenu}) {
+  if (openMenu == 2) {
+    var isOpen = true;
+  }
+
+  const handleChange = (e) => {
+    localStorage.setItem('bounce', e.target.checked);
+  }
+
+  return (
+    <div className={isOpen ? 'AnimationTab SettingsTab' : 'AnimationTab SettingsTab hidden'}>
+      <div className='MenuItem'>
+        <p>Bounce</p>
+        <input
+          type='checkbox'
+          onChange={handleChange}
+        />
+      </div>
+    </div>
+  )
+}
+
 function ConfigTab({openMenu}) {
   if (openMenu == 4) {
     var isOpen = true;
@@ -296,6 +318,7 @@ function Settings() {
   const [openMenu, setOpenMenu] = useState(0);
   // 0 - home
   // 1 - image select
+  // 2 - animation
   // 4 - config
 
 
@@ -310,6 +333,10 @@ function Settings() {
   const openImageSelect = () => {
     setOpenMenu(1);
   }
+
+  const openAnimation = () => {
+    setOpenMenu(2);
+  }
   
   return (
     <div className='Settings'>
@@ -317,6 +344,7 @@ function Settings() {
         openHome={openHome}
         openConfig={openConfig}
         openImageSelect={openImageSelect}
+        openAnimation={openAnimation}
       />
       <div className='SettingsContainer'>
         <div
@@ -324,12 +352,9 @@ function Settings() {
         >
           <MicSettings />
         </div>
-        <ConfigTab
-          openMenu={openMenu}
-        />
-        <ImageSelectTab
-          openMenu={openMenu}
-        />
+        <ConfigTab openMenu={openMenu}/>
+        <ImageSelectTab openMenu={openMenu}/>
+        <AnimationTab openMenu={openMenu}/>
       </div>
     </div>
   )
