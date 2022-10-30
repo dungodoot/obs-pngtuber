@@ -239,10 +239,10 @@ function ImageSelectTab({openMenu}) {
     <div className={isOpen ? 'ImageSelectTab SettingsTab' : 'ImageSelectTab SettingsTab hidden'}>
       <h1>Image Select</h1>
       <ImageUpload 
-        imageType='speaking'
+        imageType='inactive'
       />
       <ImageUpload
-        imageType='inactive'
+        imageType='speaking'
       />
     </div>
   )
@@ -269,6 +269,7 @@ function AnimationTab({openMenu}) {
         <input
           type='checkbox'
           onChange={handleChange}
+          defaultChecked={localStorage.bounce == 'true'}
         />
       </div>
       <div className='MenuItem'>
@@ -276,6 +277,7 @@ function AnimationTab({openMenu}) {
         <input
           type='checkbox'
           onChange={handleChangeDarken}
+          defaultChecked={localStorage.darken == 'true'}
         />
       </div>
     </div>
